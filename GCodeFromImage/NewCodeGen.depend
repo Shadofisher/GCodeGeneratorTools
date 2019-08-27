@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1566840347 source:/home/graeme/Projects/GcodeGenerator/NewCodeGen/main.c
+	<stdio.h>
+	<stdlib.h>
+	<errno.h>
+
+1566840347 source:/home/graeme/gitprojects/GCodeGeneratorTools/GCodeFromImage/main.c
+	<stdio.h>
+	<stdlib.h>
+	<errno.h>
+

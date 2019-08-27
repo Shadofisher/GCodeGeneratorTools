@@ -8,3 +8,9 @@ Couldn't find tools to suit my needs as most of them only worked with oulines as
 The first application generates a generic Gcode file form an image (.data format from gimp) and takses the following arguments:
 
 gcodegenerate XPixels YPixel Xmm Ymm Inputfile OutpotFile
+
+The second application will take as input  GCode file and optimise it in terms of paths
+
+The third application will take as input a gcode file and will remove single pixels (if required)
+
+

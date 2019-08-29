@@ -9,8 +9,9 @@ The first application generates a generic Gcode file form an image (.data format
 
 gcodegenerate XPixels YPixel Xmm Ymm Inputfile OutputFile
 
-The second application will take as input  GCode file and optimise it in terms of paths
+The second application will remove signgle gcode moves i.e. sing pixels
 
-The third application will take as input a gcode file and will remove single pixels (if required)
+The third application will attempt to optimise the paths. It will use the last position of the current path and then search all 
+unprocessed paths to see which ones' start cordinate is the closest and the use that path.
 
 

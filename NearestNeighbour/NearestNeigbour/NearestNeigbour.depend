@@ -1,8 +1,0 @@
-# depslib dependency file v1.0
-1566930513 source:/home/graeme/gitprojects/GCodeGeneratorTools/NearestNeighbour/NearestNeigbour/main.c
-	<stdio.h>
-	<stdlib.h>
-	<errno.h>
-	<string.h>
-	<math.h>
-

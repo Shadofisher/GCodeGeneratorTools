@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1567009927 source:/home/graeme/gitprojects/GCodeGeneratorTools/NearestNeighbour/RemoveSingle/main.c
+	<stdio.h>
+	<stdlib.h>
+	<errno.h>
+	<string.h>
+

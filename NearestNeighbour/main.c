@@ -296,7 +296,7 @@ int main(int argc, char * argv[])
 #if 1
     while((paths_stil_valid(num_paths)) > 0)
     {
-        start_index = findIndex(GC_Paths[index].x_end,GC_Paths[index].x_end,num_paths);
+        start_index = findIndex(GC_Paths[index].x_end,GC_Paths[index].y_end,num_paths);
         append_gcode(start_index,argv[2]);
         index = start_index;
     }

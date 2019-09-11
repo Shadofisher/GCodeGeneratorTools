@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1567015196 source:/home/graeme/gitprojects/GCodeGeneratorTools/NearestNeighbour/NearestNeigbour/main.c
+	<stdio.h>
+	<stdlib.h>
+	<errno.h>
+	<string.h>
+	<math.h>
+
+1568040346 source:c:\graeme\projects\gcodegeneratortools\nearestneighbour\main.c
+	<stdio.h>
+	<stdlib.h>
+	<errno.h>
+	<string.h>
+	<math.h>
+
+1568100748 source:c:\graeme\projects\gcodegeneratortools\removegaps\main.c
+	<stdio.h>
+	<stdlib.h>
+	<errno.h>
+	<string.h>
+	<math.h>
+
+1568190496 source:c:\graeme\projects\gcodegeneratortools\svg2gcode\main.c
+	<stdio.h>
+	<stdlib.h>
+	<errno.h>
+	<string.h>
+	<math.h>
+

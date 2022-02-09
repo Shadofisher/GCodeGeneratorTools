@@ -54,6 +54,7 @@ void calc_distance(uint32_t list_len,gcode_t * gc)
 	static uint32_t  n,m,k;
 	static uint32_t  closest_index = 0;
 	static bool direction;
+	static bool old_direction = false;
 	static bool complete = false;
 	char dist[128];
 	uint32_t index_count = 0;
@@ -79,12 +80,12 @@ void calc_distance(uint32_t list_len,gcode_t * gc)
                 sscanf(gc[m].line[0],"%s %c%f %c%f;",tmp,&c,&x2,&d,&y2);  // first comparison
                 //printf("\n\r%s",gc[m].line[0]);
                 distance_f = sqrt(pow(x1-x2,2) + (pow(y1-y2,2)));
-                //printf("\n\rDistance (F) = %f %f %f",distance_f,x2,y2);
+                printf("\n\rDistance (F) = %f %f %f",distance_f,x2,y2);
 
                 sscanf(gc[m].line[gc[m].len-1],"%s %c%f %c%f;",tmp,&c,&x2,&d,&y2);  // first comparison
                 //printf("\n\r%s",gc[m].line[gc[m].len-1]);
                 distance_l = sqrt(pow(x1-x2,2) + (pow(y1-y2,2)));
-                //printf("\n\rDistance (L) = %f %f %f",distance_l,x2,y2);
+                printf("\n\rDistance (L) = %f %f %f",distance_l,x2,y2);
                 if (distance_f == distance_l)
                 {
                     direction =true;
@@ -103,6 +104,7 @@ void calc_distance(uint32_t list_len,gcode_t * gc)
                 {
                     old_distance = distance;
                     closest_index = m;
+                    old_direction = direction;
                 }
 
                 //printf("\n\rOld Distance: %f %d",old_distance,m);
@@ -112,19 +114,27 @@ void calc_distance(uint32_t list_len,gcode_t * gc)
         }
 
         //printf("\n\rClosest index = %d %d %f",closest_index,direction,old_distance);
+        if (direction == true)
+        {
+            printf("\nDirection is forward");
+        }else
+        {
+            printf("\nDirection is reverse");
+        }
+
         gc[closest_index].valid = 1;
         index_count++;
         gc[closest_index].index = index_count;
-        gc[closest_index].direction = direction;
+        gc[closest_index].direction = old_direction;
         gc[closest_index].distance = old_distance;
-        if (direction==true)
+        if (gc[closest_index].direction==true)
         {
             sscanf(gc[closest_index].line[gc[closest_index].len-1],"%s %c%f %c%f;",tmp,&c,&x1,&d,&y1);
         }else
         {
             sscanf(gc[closest_index].line[0],"%s %c%f %c%f;",tmp,&c,&x1,&d,&y1);
         }
-        //printf("\n\r new X,Y %f %f %d",x1,y1,m);
+        printf("\n\r new X,Y %f %f %d",x1,y1,m);
 
     }
 
@@ -145,14 +155,30 @@ void calc_distance(uint32_t list_len,gcode_t * gc)
                 if ((gc[m].index == n))
                 {
                     fputs("G1 Z5\n",dp);
-                    for (k = 0; k < gc[m].len; k++)
+                    printf("\nDirection: %d",gc[m].direction);
+
+                    if (gc[m].direction == 1)
                     {
-                        if (k == 1)
+                        for (k = 0; k < gc[m].len; k++)
                         {
-                            fputs("G1 Z-2\n",dp);
+                            if (k == 1)
+                            {
+                                fputs("G1 Z-2\n",dp);
+                            }
+                            fputs(gc[m].line[k],dp);
+                            //fputs("\n",dp);
                         }
-                        fputs(gc[m].line[k],dp);
-                        //fputs("\n",dp);
+                    }else
+                    {
+                        for (k = 0; k < gc[m].len; k++)
+                        {
+                            if (k == 1)
+                            {
+                                fputs("G1 Z-2\n",dp);
+                            }
+                            fputs(gc[m].line[(gc[m].len - k)-1],dp);
+                            //fputs("\n",dp);
+                        }
                     }
                     //sprintf(dist,";Distance: %f\n\r",gc[m].distance);
                     //fputs(dist,dp);

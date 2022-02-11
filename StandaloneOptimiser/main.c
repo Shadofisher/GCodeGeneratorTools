@@ -74,18 +74,19 @@ void calc_distance(uint32_t list_len,gcode_t * gc)
         for (m = 0; m < list_len; m++)
         {
             //if ((gc[m].valid == 0) && (gc[m].len > 50))
+
             if ((gc[m].valid == 0) && ((gc[m].len > rangeLow) && (gc[m].len <= rangeHigh)))
             {
                 complete = false;
                 sscanf(gc[m].line[0],"%s %c%f %c%f;",tmp,&c,&x2,&d,&y2);  // first comparison
                 //printf("\n\r%s",gc[m].line[0]);
                 distance_f = sqrt(pow(x1-x2,2) + (pow(y1-y2,2)));
-                printf("\n\rDistance (F) = %f %f %f",distance_f,x2,y2);
+                //printf("\n\rDistance (F) = %f %f %f",distance_f,x2,y2);
 
                 sscanf(gc[m].line[gc[m].len-1],"%s %c%f %c%f;",tmp,&c,&x2,&d,&y2);  // first comparison
                 //printf("\n\r%s",gc[m].line[gc[m].len-1]);
                 distance_l = sqrt(pow(x1-x2,2) + (pow(y1-y2,2)));
-                printf("\n\rDistance (L) = %f %f %f",distance_l,x2,y2);
+                //printf("\n\rDistance (L) = %f %f %f",distance_l,x2,y2);
                 if (distance_f == distance_l)
                 {
                     direction =true;
@@ -116,10 +117,10 @@ void calc_distance(uint32_t list_len,gcode_t * gc)
         //printf("\n\rClosest index = %d %d %f",closest_index,direction,old_distance);
         if (direction == true)
         {
-            printf("\nDirection is forward");
+           // printf("\nDirection is forward");
         }else
         {
-            printf("\nDirection is reverse");
+           // printf("\nDirection is reverse");
         }
 
         gc[closest_index].valid = 1;
@@ -134,7 +135,7 @@ void calc_distance(uint32_t list_len,gcode_t * gc)
         {
             sscanf(gc[closest_index].line[0],"%s %c%f %c%f;",tmp,&c,&x1,&d,&y1);
         }
-        printf("\n\r new X,Y %f %f %d",x1,y1,m);
+       // printf("\n\r new X,Y %f %f %d",x1,y1,m);
 
     }
 
@@ -155,7 +156,7 @@ void calc_distance(uint32_t list_len,gcode_t * gc)
                 if ((gc[m].index == n))
                 {
                     fputs("G1 Z5\n",dp);
-                    printf("\nDirection: %d",gc[m].direction);
+                   // printf("\nDirection: %d",gc[m].direction);
 
                     if (gc[m].direction == 1)
                     {
@@ -214,7 +215,7 @@ int main (int argc, char *argv[])
 	rangeLow = atoi(argv[2]);
 	rangeHigh = atoi(argv[3]);
     outfile = argv[4];
-	printf("Filename  = %s %d %d %s", argv[1],rangeLow,rangeHigh,outfile);
+	printf("Filename  = %s %d %d %s\n", argv[1],rangeLow,rangeHigh,outfile);
     //exit(1);
 	gc_lines = malloc(10000 * sizeof(gcode_t));
 
